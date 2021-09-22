@@ -1,0 +1,14 @@
+html {
+  scroll-behavior: smooth;
+}
+.sell-ftco-section {
+  height: 100vh !important;
+  margin-top: 50px !important;
+}
+.btn-red {
+  color: white;
+  background-color: #e52b34 !important;
+}
+.btn-red:hover {
+  color: #ffffff;
+}
