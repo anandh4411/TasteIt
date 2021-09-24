@@ -12,3 +12,6 @@ html {
 .btn-red:hover {
   color: #ffffff;
 }
+.input-image span:host {
+  color: white !important;
+}
