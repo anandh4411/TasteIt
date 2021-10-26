@@ -15,3 +15,12 @@ html {
 .input-image span:host {
   color: white !important;
 }
+.food-card{
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 10px;
+}
+.space{
+  margin-left: 10px !important;
+}
