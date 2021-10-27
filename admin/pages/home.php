@@ -45,80 +45,93 @@ if (!isset($_SESSION["admin-username"])){
 
             <!-- New Restaurent -->
             <div class="card" style="width: 25rem;">
-              <h4>Add a new Restaurent</h4>
-              <form action="../php/movie/new-movie.php" method="post" enctype="multipart/form-data">
+              <h4>Add a new Restaurant</h4>
+              <form action="../php/restaurant/add-restaurant.php" method="post" enctype="multipart/form-data">
                   <div class="form-group">
                       <label for="exampleInputEmail1">Name</label>
-                      <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Movie Name"/>
+                      <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Restaurant Name"/>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Year</label>
-                    <input name="year" type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter Year"/>
+                    <label for="exampleInputEmail1">Location</label>
+                    <input name="location" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Location"/>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Category</label>
                     <select name="category" class="form-select" aria-label="Default select example">
                       <option selected>Category</option>
-                      <option value="recomended">Recomended</option>
-                      <option value="popular">Popular</option>
-                      <option value="romantic">Romantic</option>
-                      <option value="action">Action</option>
-                      <option value="drama">Drama</option>
-                      <option value="funny">Funny</option>
-                      <option value="tv_series">TV Series</option>
-                      <option value="tv_episodes">TV Episodes</option>
+                      <option value="ethnic">Ethnic</option>
+                      <option value="fast_food">Fast food</option>
+                      <option value="fast_casual">Fast casual</option>
+                      <option value="casual_dining">Casual dining</option>
+                      <option value="premium_casual">Premium casual</option>
+                      <option value="family_style">Family style</option>
+                      <option value="fine_dining">Fine dining</option>
+                      <option value="brasserie_and_bistro">Brasserie and bistro</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Duration</label>
-                    <input name="duration" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Duration"/>
+                    <label for="exampleInputEmail1">Owner Name</label>
+                    <input name="owner_name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Owner Name"/>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Link</label>
-                    <input name="link" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Link"/>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Image</label>
-                    <input name="image" type="file" class="form-control" id="exampleInputEmail1" placeholder="Upload Image"/>
+                    <label for="exampleInputEmail1">Phone</label>
+                    <input name="phone" type="tel" class="form-control" id="exampleInputEmail1" placeholder="Enter Phone"/>
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
               </form>
             </div>
             <!-- New Restaurent End -->
 
-            <!-- New Restaurent -->
+            <!-- New Food -->
             <div class="card" style="width: 25rem;">
               <h4>Add a new Food Item</h4>
-              <form action="../php/movie/new-movie.php" method="post" enctype="multipart/form-data">
+              <form action="../php/food/add-food.php" method="post" enctype="multipart/form-data">
                   <div class="form-group">
                       <label for="exampleInputEmail1">Name</label>
-                      <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Movie Name"/>
+                      <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Item Name"/>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Year</label>
-                    <input name="year" type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter Year"/>
+                    <label for="exampleInputEmail1">Ingredients</label>
+                    <input name="ingredients" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Ingredients"/>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Category</label>
                     <select name="category" class="form-select" aria-label="Default select example">
                       <option selected>Category</option>
-                      <option value="recomended">Recomended</option>
-                      <option value="popular">Popular</option>
-                      <option value="romantic">Romantic</option>
-                      <option value="action">Action</option>
-                      <option value="drama">Drama</option>
-                      <option value="funny">Funny</option>
-                      <option value="tv_series">TV Series</option>
-                      <option value="tv_episodes">TV Episodes</option>
+                      <option value="breakfast">Breakfast</option>
+                      <option value="lunch">Lunch</option>
+                      <option value="dinner">Dinner</option>
+                      <option value="desserts">Desserts</option>
+                      <option value="wine_card">Wine Card</option>
+                      <option value="drinks">Drinks</option>
+                      <option value="tea">Tea</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Duration</label>
-                    <input name="duration" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Duration"/>
+                    <label for="exampleInputEmail1">Restaurant</label>
+                    <select name="restaurant" class="form-select" aria-label="Default select example">
+                      <option selected>Select Restaurant</option>
+                      <?php
+                      include '../php/db.php';
+                      $query = "SELECT * FROM restaurant";
+                      $result = mysqli_query($connect, $query);
+                      while($row = mysqli_fetch_array($result)){
+                        echo '<option value="'.$row["id"].'">'.$row["name"].'</option>';
+                      }
+                      ?>
+                    </select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Link</label>
-                    <input name="link" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Link"/>
+                    <label for="exampleInputEmail1">Price</label>
+                    <input name="price" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Price"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Availability</label>
+                    <select name="availability" class="form-select" aria-label="Default select example">
+                      <option selected>Available or Not</option>
+                      <option value="available">Available</option>
+                      <option value="not_available">Not Available</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Image</label>
@@ -127,39 +140,39 @@ if (!isset($_SESSION["admin-username"])){
                   <button type="submit" class="btn btn-primary">Submit</button>
               </form>
             </div>
-            <!-- New Restaurent End -->
+            <!-- New Food End -->
   
         </div>
 
         <!-- All Restaurents List -->
         <div style="margin-top: 100px;" class="container">
-          <h2 class="text-center">List of Restaurents we have</h2>
+          <h2 style="margin-bottom: 60px;" class="text-center">List of Restaurents we have</h2>
           <table class="table">
             <thead>
               <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Image</th>
                 <th scope="col">Name</th>
-                <th scope="col">Year</th>
-                <th scope="col">Duration</th>
+                <th scope="col">Location</th>
                 <th scope="col">Category</th>
+                <th scope="col">Owner Name</th>
+                <th scope="col">Phone</th>
               </tr>
             </thead>
             <tbody>
               <?php
               include '../php/db.php';
-              $query = "SELECT * FROM movie";
+              $query = "SELECT * FROM restaurant";
               $result = mysqli_query($connect, $query);
               while($row = mysqli_fetch_array($result)){
                     echo '<tr>
                             <th scope="row">'.$row["id"].'</th>
-                            <td><img id="img-preview" src="../../uploads/'.$row["image"].'"/></td>
                             <td>'.$row["name"].'</td>
-                            <td>'.$row["year"].'</td>
-                            <td>'.$row["duration"].'</td>
+                            <td>'.$row["location"].'</td>
                             <td>'.$row["category"].'</td>
-                            <td><a href="../php/movie/update-movie.php?id='.$row["id"].'" class="btn btn-primary">Update</a></td>
-                            <td><a href="../php/movie/delete-movie.php?id='.$row["id"].'" class="btn btn-danger">Delete</a></td>
+                            <td>'.$row["owner_name"].'</td>
+                            <td>'.$row["phone"].'</td>
+                            <td><a href="../php/restaurant/update-restaurant.php?id='.$row["id"].'" class="btn btn-primary">Update</a></td>
+                            <td><a href="../php/restaurant/delete-restaurant.php?id='.$row["id"].'" class="btn btn-danger">Delete</a></td>
                           </tr>';
               }
               ?>
@@ -170,33 +183,37 @@ if (!isset($_SESSION["admin-username"])){
 
         <!-- All Food Item List -->
         <div style="margin-top: 100px;" class="container">
-          <h2 class="text-center">List of Food Items we have</h2>
+          <h2 style="margin-bottom: 60px;" class="text-center">List of Food Items we have</h2>
           <table class="table">
             <thead>
               <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Image</th>
                 <th scope="col">Name</th>
-                <th scope="col">Year</th>
-                <th scope="col">Duration</th>
+                <th scope="col">Ingredients</th>
                 <th scope="col">Category</th>
+                <th scope="col">Restaurant</th>
+                <th scope="col">Price</th>
+                <th scope="col">Availability</th>
               </tr>
             </thead>
             <tbody>
               <?php
               include '../php/db.php';
-              $query = "SELECT * FROM movie";
+              $query = "SELECT * FROM food_item";
               $result = mysqli_query($connect, $query);
               while($row = mysqli_fetch_array($result)){
                     echo '<tr>
                             <th scope="row">'.$row["id"].'</th>
                             <td><img id="img-preview" src="../../uploads/'.$row["image"].'"/></td>
                             <td>'.$row["name"].'</td>
-                            <td>'.$row["year"].'</td>
-                            <td>'.$row["duration"].'</td>
+                            <td>'.$row["ingredients"].'</td>
                             <td>'.$row["category"].'</td>
-                            <td><a href="../php/movie/update-movie.php?id='.$row["id"].'" class="btn btn-primary">Update</a></td>
-                            <td><a href="../php/movie/delete-movie.php?id='.$row["id"].'" class="btn btn-danger">Delete</a></td>
+                            <td>'.$row["restaurant"].'</td>
+                            <td>'.$row["price"].'</td>
+                            <td>'.$row["availability"].'</td>
+                            <td><a href="../php/food/update-food.php?id='.$row["id"].'" class="btn btn-primary">Update</a></td>
+                            <td><a href="../php/food/delete-food.php?id='.$row["id"].'" class="btn btn-danger">Delete</a></td>
                           </tr>';
               }
               ?>
