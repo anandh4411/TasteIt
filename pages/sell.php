@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,6 +58,13 @@
                     <li class="nav-item"><a href="food.html" class="nav-link">Food</a></li>
                     <li class="nav-item active"><a href="sell.html" class="nav-link">Sell</a></li>
                     <li class="nav-item"><a href="cart.html" class="nav-link">Cart</a></li>
+                    <?php 
+                        if(isset($_SESSION["restaurant-name"])){
+                            echo '<li class="nav-item"><a href="" class="nav-link">'.$_SESSION["restaurant-name"].'</a></li>';
+                            echo '<li class="nav-item"><a href="../php/restaurant/logout.php" class="nav-link">Logout</a></li>';
+                        }
+                        else echo '<li class="nav-item"><a href="restaurant-login.php" class="nav-link">Login</a></li>';
+                    ?>
                 </ul>
             </div>
         </div>
@@ -95,80 +103,86 @@
         </div>
     </section>
 
-    <section id="account-ftco-section" class="sell-ftco-section ftco-section ftco-wrap-about ftco-no-pb ftco-no-pt">
-        <div class="container">
-            <div class="row no-gutters">
-                <div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
-                    <form action="#" class="appointment-form">
-                        <h3 class="mb-3">Create your account now</h3>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="name" class="form-control" placeholder="Restaurant Name">
-                                </div>
+    <!-- Create Account -->
+    <?php 
+        if(!isset($_SESSION["restaurant-name"])){
+            echo '<section id="account-ftco-section" class="sell-ftco-section ftco-section ftco-wrap-about ftco-no-pb ftco-no-pt">
+                    <div class="container">
+                        <div class="row no-gutters">
+                            <div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
+                                <form action="../php/restaurant/add-restaurant.php" method="post" class="appointment-form">
+                                    <h3 class="mb-3">Create your account now</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input name="name" type="name" class="form-control" placeholder="Restaurant Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input name="location" type="text" class="form-control" placeholder="Location">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <select name="category" class="form-control" aria-label="Default select example">
+                                                <option selected>Category</option>
+                                                <option value="ethnic">Ethnic</option>
+                                                <option value="fast_food">Fast food</option>
+                                                <option value="fast_casual">Fast casual</option>
+                                                <option value="casual_dining">Casual dining</option>
+                                                <option value="premium_casual">Premium casual</option>
+                                                <option value="family_style">Family style</option>
+                                                <option value="fine_dining">Fine dining</option>
+                                                <option value="brasserie_and_bistro">Brasserie and bistro</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input name="owner_name" type="text" class="form-control" placeholder="Owner Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input name="phone" type="text" class="form-control" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="submit" value="Create" class="btn btn-white py-3 px-4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Location">
+                            <div class="col-sm-8 wrap-about py-5 ftco-animate img"
+                                style="background-image:url(images/xabout.jpg.pagespeed.ic.1t7Mz0zawr.jpg)">
+                                <div class="row pb-5 pb-md-0">
+                                    <div class="col-md-12 col-lg-7">
+                                        <div class="heading-section mt-5 mb-4">
+                                            <div class="pl-lg-3 ml-md-5">
+                                                <span class="subheading">Register</span>
+                                                <h2 class="mb-4">Register your restaurant with us.</h2>
+                                            </div>
+                                        </div>
+                                        <div class="pl-lg-3 ml-md-5">
+                                            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came
+                                                from it would have been rewritten a thousand times and everything that was left from
+                                                its origin would be the word "and" and the Little Blind Text should turn around and
+                                                return to its own, safe country. A small river named Duden flows by their place and
+                                                supplies it with the necessary regelialia. It is a paradisematic country, in which
+                                                roasted parts of sentences fly into your mouth.</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <select name="category" class="form-control" aria-label="Default select example">
-                                      <option selected>Category</option>
-                                      <option value="ethnic">Ethnic</option>
-                                      <option value="fast_food">Fast food</option>
-                                      <option value="fast_casual">Fast casual</option>
-                                      <option value="casual_dining">Casual dining</option>
-                                      <option value="premium_casual">Premium casual</option>
-                                      <option value="family_style">Family style</option>
-                                      <option value="fine_dining">Fine dining</option>
-                                      <option value="brasserie_and_bistro">Brasserie and bistro</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Owner Name">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Phone">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="submit" value="Create" class="btn btn-white py-3 px-4">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-sm-8 wrap-about py-5 ftco-animate img"
-                    style="background-image:url(images/xabout.jpg.pagespeed.ic.1t7Mz0zawr.jpg)">
-                    <div class="row pb-5 pb-md-0">
-                        <div class="col-md-12 col-lg-7">
-                            <div class="heading-section mt-5 mb-4">
-                                <div class="pl-lg-3 ml-md-5">
-                                    <span class="subheading">Register</span>
-                                    <h2 class="mb-4">Register your restaurant with us.</h2>
-                                </div>
-                            </div>
-                            <div class="pl-lg-3 ml-md-5">
-                                <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came
-                                    from it would have been rewritten a thousand times and everything that was left from
-                                    its origin would be the word "and" and the Little Blind Text should turn around and
-                                    return to its own, safe country. A small river named Duden flows by their place and
-                                    supplies it with the necessary regelialia. It is a paradisematic country, in which
-                                    roasted parts of sentences fly into your mouth.</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                  </section>';
+        }
+    ?>
+    <!-- Create Account End -->
 
     <section id="food-ftco-section" class="sell-ftco-section ftco-section ftco-wrap-about ftco-no-pb ftco-no-pt">
         <div class="container">
@@ -195,28 +209,52 @@
                     </div>
                 </div>
                 <div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
-                    <form action="#" class="appointment-form">
-                        <h3 class="mb-3">Enter Product Details</h3>
+                    <form action="../php/food/add-food.php" method="post" class="appointment-form" enctype="multipart/form-data">
+                        <h3 class="mb-3">Enter Item Details</h3>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input class="input-image" type="file" onchange="previewFile()"><br>
-                                    <img src="" height="200">
+                                    <input name="image" style="display: none;" class="form-control input-image" type="file" id="files" />
+                                    <label class="for-files" for="files">Select Image</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="name" class="form-control" placeholder="Product Name">
+                                    <input name="name" type="name" class="form-control" placeholder="Product Name">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Description">
+                                    <input name="ingredients" type="text" class="form-control" placeholder="Ingredients">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="number" class="form-control" placeholder="Price">
+                                    <select name="category" class="form-control form-select" aria-label="Default select example">
+                                    <option selected>Category</option>
+                                    <option value="breakfast">Breakfast</option>
+                                    <option value="lunch">Lunch</option>
+                                    <option value="dinner">Dinner</option>
+                                    <option value="desserts">Desserts</option>
+                                    <option value="wine_card">Wine Card</option>
+                                    <option value="drinks">Drinks</option>
+                                    <option value="tea">Tea</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <?php echo '<input name="id" hidden value="'.$_SESSION["restaurant-id"].'" type="number">'; ?>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input name="price" type="number" class="form-control" placeholder="Price">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select name="availability" class="form-control form-select" aria-label="Default select example">
+                                        <option selected>Available or Not</option>
+                                        <option value="available">Available</option>
+                                        <option value="not_available">Not available</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -226,6 +264,71 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="food-ftco-section" class="sell-ftco-section ftco-section ftco-wrap-about ftco-no-pb ftco-no-pt">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-sm-8 wrap-about py-5 ftco-animate img"
+                    style="background-image:url(images/xabout.jpg.pagespeed.ic.1t7Mz0zawr.jpg)">
+                    <div class="row pb-5 pb-md-0">
+                        <div class="col-md-12 col-lg-7">
+                            <div class="heading-section mt-5 mb-4">
+                                <div class="pl-lg-3 ml-md-5">
+                                    <span class="subheading">Items</span>
+                                    <h2 class="mb-4">List Of Products You Have.</h2>
+                                </div>
+                            </div>
+                            <div class="pl-lg-3 ml-md-5">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Ingredients</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Restaurant</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Availability</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    include '../php/db.php';
+                                    $id = $_SESSION["restaurant-id"];
+                                    $query = "SELECT * FROM food_item WHERE restaurant=$id";
+                                    $result = mysqli_query($connect, $query);
+                                    while($row = mysqli_fetch_array($result)){
+                                            $restaurant = "";
+                                            $id2 = $row["restaurant"];
+                                            $query2 = "SELECT * FROM restaurant WHERE id=$id2";
+                                            $result2 = mysqli_query($connect, $query2);
+                                            while($row2 = mysqli_fetch_array($result2)){
+                                                $restaurant = $row2["name"];
+                                            }
+                                            echo '<tr>
+                                                    <th scope="row">'.$row["id"].'</th>
+                                                    <td><img id="img-preview" src="../uploads/'.$row["image"].'"/></td>
+                                                    <td>'.$row["name"].'</td>
+                                                    <td>'.$row["ingredients"].'</td>
+                                                    <td>'.$row["category"].'</td>
+                                                    <td>'.$restaurant.'</td>
+                                                    <td>'.$row["price"].'</td>
+                                                    <td>'.$row["availability"].'</td>
+                                                    <td><a href="update-food.php?id='.$row["id"].'" class="btn btn-blue">Update</a></td>
+                                                    <td><a href="../php/food/delete-food.php?id='.$row["id"].'" class="btn btn-primary">Delete</a></td>
+                                                </tr>';
+                                    }
+                                    ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

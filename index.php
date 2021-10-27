@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,8 +56,16 @@
 					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="pages/about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="pages/food.html" class="nav-link">Food</a></li>
-					<li class="nav-item"><a href="pages/sell.html" class="nav-link">Sell</a></li>
-					<li class="nav-item"><a href="pages/cart.html" class="nav-link">Cart</a></li>
+					<li class="nav-item"><a href="pages/sell.php" class="nav-link">Sell</a></li>
+					<?php 
+						if(isset($_SESSION["username"])) {
+							echo '<li class="nav-item"><a href="pages/cart.html" class="nav-link">Cart</a></li>'; 
+							echo '<li class="nav-item"><a href="php/user/logout.php" class="nav-link">Logout - '.$_SESSION["username"].'</a></li>'; 
+						}
+						else{
+							echo '<li class="nav-item"><a href="pages/user-login.php" class="nav-link">Login</a></li>'; 
+						}
+					?>
 				</ul>
 			</div>
 		</div>
@@ -100,25 +109,34 @@
 		<div class="container">
 			<div class="row no-gutters">
 				<div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
-					<form action="#" class="appointment-form">
+					<form action="php/user/add-user.php" method="post" class="appointment-form">
 						<h3 class="mb-3">Create your account now</h3>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="name" class="form-control" placeholder="Name">
+									<input name="name" type="name" class="form-control" placeholder="Name">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Phone">
+									<input name="phone" type="text" class="form-control" placeholder="Phone">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Location">
+									<input name="location" type="text" class="form-control" placeholder="Location">
 								</div>
 							</div>
-
+							<div class="col-md-12">
+								<div class="form-group">
+									<input name="password" type="text" class="form-control" placeholder="Password">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<input name="cpassword" type="text" class="form-control" placeholder="Confirm Password">
+								</div>
+							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<input type="submit" value="Create" class="btn btn-white py-3 px-4">
