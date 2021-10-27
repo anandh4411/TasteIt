@@ -116,7 +116,7 @@ if (!isset($_SESSION["admin-username"])){
                       $query = "SELECT * FROM restaurant";
                       $result = mysqli_query($connect, $query);
                       while($row = mysqli_fetch_array($result)){
-                        echo '<option value="'.$row["id"].'">'.$row["name"].'</option>';
+                        echo '<option value="'.$row["name"].'">'.$row["name"].'</option>';
                       }
                       ?>
                     </select>

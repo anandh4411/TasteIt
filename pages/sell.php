@@ -46,18 +46,18 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="../index.html">Taste.<span>it</span></a>
+            <a class="navbar-brand" href="../index.php">Taste.<span>it</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="../index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="food.html" class="nav-link">Food</a></li>
-                    <li class="nav-item active"><a href="sell.html" class="nav-link">Sell</a></li>
-                    <li class="nav-item"><a href="cart.html" class="nav-link">Cart</a></li>
+                    <li class="nav-item"><a href="food.php" class="nav-link">Food</a></li>
+                    <li class="nav-item active"><a href="sell.php" class="nav-link">Sell</a></li>
+                    <li class="nav-item"><a href="cart.php" class="nav-link">Cart</a></li>
                     <?php 
                         if(isset($_SESSION["restaurant-name"])){
                             echo '<li class="nav-item"><a href="" class="nav-link">'.$_SESSION["restaurant-name"].'</a></li>';

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,11 +53,11 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="../index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="food.html" class="nav-link">Food</a></li>
-                    <li class="nav-item active"><a href="sell.html" class="nav-link">Sell</a></li>
-                    <li class="nav-item"><a href="cart.html" class="nav-link">Cart</a></li>
+                    <li class="nav-item"><a href="food.php" class="nav-link">Food</a></li>
+                    <li class="nav-item"><a href="sell.php" class="nav-link">Sell</a></li>
+                    <li class="nav-item active"><a href="cart.php" class="nav-link">Cart</a></li>
                 </ul>
             </div>
         </div>
@@ -102,41 +103,73 @@
                     style="background-image:url(images/xabout.jpg.pagespeed.ic.1t7Mz0zawr.jpg)">
                     <div class="col">
                         <div class="row">
-                            <div class="food-card" style="width: 40rem;">
-                                <div class="row">
-                                <img class="card-img-top" src="..." alt="Food Item">
-                                <div class="space card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <small>In stock</small>
-                                    <div class="row">
-                                        <form action=""><button type="submit" class="space btn btn-primary">-</button></form>
-                                        <span style="margin-left: 10px;">45</span>
-                                        <form action=""><button type="submit" class="space btn btn-primary">+</button></form>
-                                        <form action=""><button type="submit" class="space btn btn-primary">Delete</button></form>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                                $total_items = 0;
+                                $total_price = 0;
+                                if(!empty($_SESSION["cart"])){
+                                    include '../php/db.php';
+                                    $whereIn = implode(',', $_SESSION["cart"]);
+                                    $query = "SELECT * FROM food_item WHERE id IN ($whereIn)";
+                                    $result = mysqli_query($connect, $query);
+                                    while($row = mysqli_fetch_array($result)){
+                                        echo '<div class="food-card" style="width: 40rem;">
+                                                <div class="row">
+                                                <img id="img-preview" class="card-img-top" src="../uploads/'.$row["image"].'" alt="Food Item">
+                                                <div class="space card-body">
+                                                    <h5 class="card-title">'.$row["name"].'</h5>
+                                                    <h5 style="color: red; font-weight: 600;" class="card-title">₹'.$row["price"].'</h5>
+                                                    <small>'.$row["availability"].'</small>
+                                                    <div class="row">
+                                                        <form action="">
+                                                            <input hidden name="option" value="decrement"/>
+                                                            <input hidden name="quantity" value=""/>
+                                                            <button type="submit" class="space btn btn-primary">-</button>
+                                                        </form>
+                                                        <span style="margin-left: 10px;">1</span>
+                                                        <form action="">
+                                                            <input hidden name="option" value="increment"/>
+                                                            <input hidden name="quantity" value=""/>
+                                                            <button type="submit" class="space btn btn-primary">+</button>
+                                                        </form>
+                                                        <form method="post" action="../php/user/delete-from-cart.php">
+                                                            <input hidden name="option" value="delete"/>
+                                                            <input hidden name="id" value="'.$row["id"].'"/>
+                                                            <button type="submit" class="space btn btn-primary">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>';
+                                        $total_items++;
+                                        $total_price += $row["price"];
+                                    }
+                                }
+                                else{
+                                    echo '<h4>Your cart is empty!</h4>';
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
-                    <form action="#" class="appointment-form">
-                        <h3 class="mb-3">Subtotal (9 items):</h3>
-                        <h3>9355rs</h3>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <span style="color: white;">Eligible for free delivery</span>
+                    <?php
+                        echo '<form action="#" class="appointment-form">
+                                <h3 class="mb-3">Subtotal ('.$total_items.' items):</h3>
+                                <h3>₹'.$total_price.'</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <span style="color: white;">Eligible for free delivery</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="submit" value="Checkout" class="btn btn-white py-3 px-4">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="submit" value="Checkout" class="btn btn-white py-3 px-4">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                            </form>';     
+                    ?>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@
 <body>
     <?php
         if(isset($_SESSION["username"])){
-            header("Location: pages/home.html");
+            header("Location: pages/home.php");
         }
         else{
             echo '<div class="container">
